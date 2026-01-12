@@ -18,17 +18,7 @@ async function startServer() {
     });
 
     // Graceful shutdown
-    process.on("SIGINT", async () => {
-      console.log("🛑 Shutting down server...");
-      await prisma.$disconnect();
-      server.close(() => process.exit(0));
-    });
-
-    process.on("SIGTERM", async () => {
-      console.log("🛑 Terminating server...");
-      await prisma.$disconnect();
-      server.close(() => process.exit(0));
-    });
+    
   } catch (error) {
     console.error("✗ Database connection failed:", error);
     process.exit(1); // Stop server if DB fails
